@@ -11,6 +11,7 @@ package com.smartcampus;
 
 import com.smartcampus.resource.DiscoveryResource;
 import com.smartcampus.resource.RoomResource;
+import com.smartcampus.resource.SensorResource;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -24,6 +25,7 @@ public class Main {
         ResourceConfig config = new ResourceConfig();
         config.register(DiscoveryResource.class);
         config.register(RoomResource.class);
+        config.register(SensorResource.class);
 
         HttpServer server = GrizzlyHttpServerFactory
                 .createHttpServer(URI.create(BASE_URI), config);
