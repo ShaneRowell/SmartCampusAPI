@@ -1,7 +1,9 @@
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\AppConfig.java
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\DataStore.java
+C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\exception\RoomNotEmptyException.java
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\Main.java
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\model\Room.java
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\model\Sensor.java
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\model\SensorReading.java
 C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\resource\DiscoveryResource.java
+C:\Users\Rowel\OneDrive\Desktop\SmartCampusAPI\src\main\java\com\smartcampus\resource\RoomResource.java

@@ -10,6 +10,7 @@ package com.smartcampus;
  */
 
 import com.smartcampus.resource.DiscoveryResource;
+import com.smartcampus.resource.RoomResource;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -22,6 +23,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         ResourceConfig config = new ResourceConfig();
         config.register(DiscoveryResource.class);
+        config.register(RoomResource.class);
 
         HttpServer server = GrizzlyHttpServerFactory
                 .createHttpServer(URI.create(BASE_URI), config);
