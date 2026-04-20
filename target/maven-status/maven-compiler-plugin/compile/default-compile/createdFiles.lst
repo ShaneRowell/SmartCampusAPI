@@ -1,6 +1,7 @@
-com\smartcampus\model\Room.class
-com\smartcampus\AppConfig.class
 com\smartcampus\DataStore.class
 com\smartcampus\model\Sensor.class
 com\smartcampus\Main.class
+com\smartcampus\model\Room.class
+com\smartcampus\AppConfig.class
+com\smartcampus\resource\DiscoveryResource.class
 com\smartcampus\model\SensorReading.class
