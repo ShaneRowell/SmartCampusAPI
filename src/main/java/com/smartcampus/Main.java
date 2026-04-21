@@ -9,6 +9,11 @@ package com.smartcampus;
  * @author Rowel
  */
 
+import com.smartcampus.exception.GlobalExceptionMapper;
+import com.smartcampus.exception.LinkedResourceNotFoundExceptionMapper;
+import com.smartcampus.exception.RoomNotEmptyExceptionMapper;
+import com.smartcampus.exception.SensorUnavailableExceptionMapper;
+import com.smartcampus.filter.LoggingFilter;
 import com.smartcampus.resource.DiscoveryResource;
 import com.smartcampus.resource.RoomResource;
 import com.smartcampus.resource.SensorResource;
@@ -23,9 +28,20 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         ResourceConfig config = new ResourceConfig();
+
+        // Resources
         config.register(DiscoveryResource.class);
         config.register(RoomResource.class);
         config.register(SensorResource.class);
+
+        // Exception Mappers
+        config.register(RoomNotEmptyExceptionMapper.class);
+        config.register(LinkedResourceNotFoundExceptionMapper.class);
+        config.register(SensorUnavailableExceptionMapper.class);
+        config.register(GlobalExceptionMapper.class);
+
+        // Filters
+        config.register(LoggingFilter.class);
 
         HttpServer server = GrizzlyHttpServerFactory
                 .createHttpServer(URI.create(BASE_URI), config);
