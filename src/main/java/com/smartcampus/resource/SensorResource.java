@@ -11,11 +11,14 @@ package com.smartcampus.resource;
 
 import com.smartcampus.DataStore;
 import com.smartcampus.exception.LinkedResourceNotFoundException;
-import com.smartcampus.model.Sensor;
 import com.smartcampus.model.Room;
+import com.smartcampus.model.Sensor;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -47,8 +50,7 @@ public class SensorResource {
 
     // POST /api/v1/sensors - Create a new sensor
     @POST
-    public Response createSensor(Sensor sensor) {
-        // Validate that the roomId exists
+    public Response createSensor(Sensor sensor, @Context UriInfo uriInfo) {
         Room room = store.getRoom(sensor.getRoomId());
         if (room == null) {
             throw new LinkedResourceNotFoundException(
@@ -59,11 +61,14 @@ public class SensorResource {
             sensor.setId(UUID.randomUUID().toString());
         }
 
-        // Add sensor ID to the room's sensor list
         room.getSensorIds().add(sensor.getId());
-
         store.addSensor(sensor);
-        return Response.status(Response.Status.CREATED).entity(sensor).build();
+
+        URI location = uriInfo.getAbsolutePathBuilder()
+                .path(sensor.getId())
+                .build();
+
+        return Response.created(location).entity(sensor).build();
     }
 
     // GET /api/v1/sensors/{sensorId} - Get a specific sensor

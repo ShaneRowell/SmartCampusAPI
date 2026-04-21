@@ -13,8 +13,11 @@ import com.smartcampus.DataStore;
 import com.smartcampus.exception.RoomNotEmptyException;
 import com.smartcampus.model.Room;
 import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -35,12 +38,17 @@ public class RoomResource {
 
     // POST /api/v1/rooms - Create a new room
     @POST
-    public Response createRoom(Room room) {
+    public Response createRoom(Room room, @Context UriInfo uriInfo) {
         if (room.getId() == null || room.getId().isEmpty()) {
             room.setId(UUID.randomUUID().toString());
         }
         store.addRoom(room);
-        return Response.status(Response.Status.CREATED).entity(room).build();
+
+        URI location = uriInfo.getAbsolutePathBuilder()
+                .path(room.getId())
+                .build();
+
+        return Response.created(location).entity(room).build();
     }
 
     // GET /api/v1/rooms/{roomId} - Get a specific room
@@ -67,7 +75,7 @@ public class RoomResource {
                     .build();
         }
         if (!room.getSensorIds().isEmpty()) {
-            throw new RoomNotEmptyException("Room " + roomId + 
+            throw new RoomNotEmptyException("Room " + roomId +
                 " cannot be deleted as it still has sensors assigned to it.");
         }
         store.deleteRoom(roomId);

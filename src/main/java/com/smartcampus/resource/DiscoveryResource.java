@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-@Path("/discovery")
+@Path("/")
 public class DiscoveryResource {
 
     @GET
